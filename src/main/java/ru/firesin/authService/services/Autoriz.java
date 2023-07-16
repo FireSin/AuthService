@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping
 public class Autoriz {
+
     @Autowired
     private UserRepository userRepository;
 
