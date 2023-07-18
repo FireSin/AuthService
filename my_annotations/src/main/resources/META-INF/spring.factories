@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  ru.firesin.my_annotations.config.StarterAnnotationsConfig
