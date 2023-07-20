@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>ru.firesin</groupId>
-            <artifactId>my_annotations</artifactId>
+            <artifactId>my-annotations</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

@@ -1,4 +1,4 @@
-package ru.firesin.my_annotations.secured;
+package ru.firesin.annotations.secured;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

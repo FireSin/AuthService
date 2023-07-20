@@ -6,6 +6,5 @@ import ru.firesin.auth.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByToken(String token); //TODO Зачем?
     User findByName(String name);
 }

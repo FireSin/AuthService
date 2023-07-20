@@ -1,14 +1,12 @@
 package ru.firesin.entry.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.firesin.my_annotations.secured.MySecured;
+import ru.firesin.annotations.secured.MySecured;
 
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping //TODO Не нужно
 public class EntryController {
 
     @PostMapping("/entry")

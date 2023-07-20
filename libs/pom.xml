@@ -14,7 +14,7 @@
 
     <modules>
         <module>tokens</module>
-        <module>my_annotations</module>
+        <module>my-annotations</module>
     </modules>
 
     <parent>

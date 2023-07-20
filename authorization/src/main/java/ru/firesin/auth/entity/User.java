@@ -1,8 +1,7 @@
 package ru.firesin.auth.entity;
 
-import lombok.Data; //TODO Куча говна
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,16 +15,20 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @NoArgsConstructor
 @Table(name = "my_user")
-public class User { //TODO 0 @Column и нихуя не понятно тк слитно
+public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @NotBlank(message = "Name is required")
-    @Column(nullable = false, unique = true)
+    @Column(name = "Name", nullable = false, unique = true)
     private String name;
+
     @NotBlank(message = "Password is required")
-    @Column(nullable = false)
+    @Column(name = "Password", nullable = false)
     private String password;
+
+    @Column(name = "Role")
     private String role;
-    private String token;
 }
