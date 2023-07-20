@@ -12,10 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-@Slf4j
 @Data
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "my_user")
 public class User {
     @Id

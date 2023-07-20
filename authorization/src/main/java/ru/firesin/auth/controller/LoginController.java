@@ -1,5 +1,6 @@
 package ru.firesin.auth.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,17 +13,19 @@ import ru.firesin.auth.service.AuthService;
 
 import java.security.SecureRandom;
 import java.util.Base64;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping
+@AllArgsConstructor
 public class LoginController {
 
     @Autowired
-    private AuthService authService;
+    private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserDTO userDTO) {
-        return authService.authorize(userDTO);
+    public String login(@RequestBody UserDTO userDTO, HttpServletResponse response) {
+        return authService.authorize(userDTO, response);
     }
 }
 

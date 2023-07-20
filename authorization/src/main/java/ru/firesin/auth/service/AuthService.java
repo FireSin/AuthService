@@ -1,48 +1,60 @@
 package ru.firesin.auth.service;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import ru.firesin.auth.dto.request.UserDTO;
 import ru.firesin.auth.entity.User;
 import ru.firesin.auth.repository.UserRepository;
+import ru.firesin.tokens.service.TokenService;
 
-import java.security.SecureRandom;
-import java.util.Base64;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 
 @Component
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 public class AuthService {
-    private static final String MASTER_PASSWORD = "WhiteRabbit";
     @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    @Autowired
+    private final TokenService tokenService;
 
-    public ResponseEntity<String> authorize(UserDTO userDTO){
+    public String authorize(UserDTO userDTO, HttpServletResponse response){
         User user = userRepository.findByName(userDTO.getName());
         if (user == null){
-            return registerUser(userDTO);
+            return registerUser(userDTO, response);
         }
-        if (user.getPassword().equals(userDTO.getPassword())){
+        if (PasswordService.checkPassword(userDTO.getPassword(), user.getPassword())){
             HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + user.getToken());
-            return ResponseEntity.ok().headers(headers).body("Login success");
+            String jwt = user.getToken();
+            Cookie cookie = new Cookie("jwt", jwt);
+            cookie.setMaxAge(3600);
+            response.addCookie(cookie);
+            return "Login success";
         }
-        return ResponseEntity.ok("False username or password");
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        return "Bad login or password";
     }
 
-    private ResponseEntity<String> registerUser(UserDTO userDTO){
+    private String registerUser(UserDTO userDTO, HttpServletResponse response){
         User user = new User();
         user.setName(userDTO.getName());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(PasswordService.hashPassword(userDTO.getPassword()));
         user.setRole("localUser");
-        user.setToken("QT1");
+        user.setToken(tokenService.generateToken(user.getRole()));
         userRepository.save(user);
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + user.getToken());
-        return ResponseEntity.ok().headers(headers).body("Registry success");
+        String jwt = user.getToken();
+        Cookie cookie = new Cookie("jwt", jwt);
+        cookie.setMaxAge(3600);
+        response.addCookie(cookie);
+        return "Register success";
     }
 }
