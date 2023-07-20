@@ -2,11 +2,8 @@ package ru.firesin.auth.service;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import ru.firesin.auth.dto.request.UserDTO;
 import ru.firesin.auth.entity.User;

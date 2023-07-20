@@ -15,8 +15,7 @@
 	<modules>
 		<module>entry</module>
 		<module>authorization</module>
-		<module>my_annotations</module>
-		<module>tokens</module>
+		<module>libs</module>
 	</modules>
 
 	<parent>
