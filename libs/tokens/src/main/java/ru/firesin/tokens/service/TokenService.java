@@ -19,20 +19,20 @@ public class TokenService {
     public String generateToken(String role){
         Algorithm algorithm = Algorithm.HMAC512(masterKey);
         try {
-            String token = JWT.create()
+            String token = JWT.create() //TODO inline
                 .withClaim("Role", role)
                 .sign(algorithm);
             return token;
-        } catch (JWTCreationException exception){
+        } catch (JWTCreationException exception){ //TODO Смысл?
             throw exception;
         }
     }
 
-    public boolean checkToken(String token, String access){
+    public boolean checkToken(String token, String access){ //TODO Вместо boolean лучше ошибки кидать
         if (token == null){
             return false;
         }
-        Algorithm algorithm = Algorithm.HMAC512(masterKey);
+        Algorithm algorithm = Algorithm.HMAC512(masterKey); //TODO Вынести в поле
         JWTVerifier verifier = JWT.require(algorithm).build();
 
         try {

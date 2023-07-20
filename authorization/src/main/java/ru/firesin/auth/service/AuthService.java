@@ -12,13 +12,13 @@ import ru.firesin.tokens.service.TokenService;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-
+//TODO 0 интерфейсов
 
 @Component
 @Data
 @AllArgsConstructor
 public class AuthService {
-    @Autowired
+    @Autowired //TODO хуйня, смысл я рассказывал?
     private final UserRepository userRepository;
     @Autowired
     private final TokenService tokenService;
@@ -28,19 +28,19 @@ public class AuthService {
         if (user == null){
             return registerUser(userDTO, response);
         }
-        if (PasswordService.checkPassword(userDTO.getPassword(), user.getPassword())){
-            HttpHeaders headers = new HttpHeaders();
+        if (PasswordService.checkPassword(userDTO.getPassword(), user.getPassword())) {
+            HttpHeaders headers = new HttpHeaders(); //TODO Зачем?
             String jwt = user.getToken();
             Cookie cookie = new Cookie("jwt", jwt);
             cookie.setMaxAge(3600);
             response.addCookie(cookie);
             return "Login success";
         }
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        response.setStatus(HttpServletResponse.SC_FORBIDDEN); //TODO Это должно через Exception работать
         return "Bad login or password";
     }
 
-    private String registerUser(UserDTO userDTO, HttpServletResponse response){
+    private String registerUser(UserDTO userDTO, HttpServletResponse response){ //TODO Всё в одном месте + не должен токен в БД храниться, это его прикол
         User user = new User();
         user.setName(userDTO.getName());
         user.setPassword(PasswordService.hashPassword(userDTO.getPassword()));

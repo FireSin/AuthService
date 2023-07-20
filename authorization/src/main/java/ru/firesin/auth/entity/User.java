@@ -1,6 +1,6 @@
 package ru.firesin.auth.entity;
 
-import lombok.Data;
+import lombok.Data; //TODO Куча говна
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @NoArgsConstructor
 @Table(name = "my_user")
-public class User {
+public class User { //TODO 0 @Column и нихуя не понятно тк слитно
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

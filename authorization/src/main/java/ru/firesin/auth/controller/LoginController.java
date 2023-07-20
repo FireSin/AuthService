@@ -1,6 +1,6 @@
 package ru.firesin.auth.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor; //TODO Куча говна
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,14 +16,14 @@ import java.util.Base64;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping
+@RequestMapping //TODO Нахуя?
 @AllArgsConstructor
 public class LoginController {
 
-    @Autowired
+    @Autowired //TODO хуйня
     private final AuthService authService;
 
-    @PostMapping("/login")
+    @PostMapping("/login")  //TODO Почему в сервисе добавляется JWT?
     public String login(@RequestBody UserDTO userDTO, HttpServletResponse response) {
         return authService.authorize(userDTO, response);
     }

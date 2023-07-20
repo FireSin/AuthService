@@ -8,7 +8,7 @@ import ru.firesin.my_annotations.secured.MySecured;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping
+@RequestMapping //TODO Не нужно
 public class EntryController {
 
     @PostMapping("/entry")
