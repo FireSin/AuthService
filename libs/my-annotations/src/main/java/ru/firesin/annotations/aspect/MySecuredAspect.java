@@ -29,10 +29,10 @@ public class MySecuredAspect {
         try {
             Cookie cookie = WebUtils.getCookie(request, "jwt");
             tokenService.checkToken(cookie.getValue(), mySecured.value());
-            return joinPoint.proceed();
         } catch (Exception e){
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            return null;
         }
-        return null;
+        return joinPoint.proceed();
     }
 }

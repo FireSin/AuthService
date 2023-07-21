@@ -8,15 +8,13 @@ import ru.firesin.auth.exceptions.AuthorizeException;
 import ru.firesin.auth.repository.UserRepository;
 import ru.firesin.tokens.service.TokenService;
 
-import javax.servlet.http.Cookie;
-
 @Service
 @AllArgsConstructor
 public class AuthServiceImpl implements AuthService{
     private final UserRepository userRepository;
     private final TokenService tokenService;
 
-    public Cookie authorize(UserDTO userDTO) throws AuthorizeException {
+    public String authorize(UserDTO userDTO) throws AuthorizeException {
         User user = userRepository.findByName(userDTO.getName());
         if (user == null){
             user = new User();
@@ -27,9 +25,6 @@ public class AuthServiceImpl implements AuthService{
         } else if (!PasswordService.checkPassword(userDTO.getPassword(), user.getPassword())) {
             throw new AuthorizeException("Bad login or password");
         }
-        String jwt = tokenService.generateToken(user.getRole());
-        Cookie cookie = new Cookie("jwt", jwt);
-        cookie.setMaxAge(3600);
-        return cookie;
+        return tokenService.generateToken(user.getRole());
     }
 }

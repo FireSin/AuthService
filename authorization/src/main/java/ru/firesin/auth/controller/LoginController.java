@@ -18,12 +18,10 @@ public class LoginController {
 
     @PostMapping("/login")
     public void login(@RequestBody UserDTO userDTO, HttpServletResponse response) {
-        try {
-            Cookie cookie = authService.authorize(userDTO);
-            response.addCookie(cookie);
-        } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        }
+        String jwt = authService.authorize(userDTO);
+        Cookie cookie = new Cookie("jwt", jwt);
+        cookie.setMaxAge(3600);
+        response.addCookie(cookie);
     }
 }
 
