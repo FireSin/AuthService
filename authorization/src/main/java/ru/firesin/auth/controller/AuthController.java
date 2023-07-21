@@ -12,13 +12,21 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @AllArgsConstructor
-public class LoginController {
+public class AuthController {
 
     private final AuthService authService;
 
     @PostMapping("/login")
     public void login(@RequestBody UserDTO userDTO, HttpServletResponse response) {
-        String jwt = authService.authorize(userDTO);
+        String jwt = authService.login(userDTO);
+        Cookie cookie = new Cookie("jwt", jwt);
+        cookie.setMaxAge(3600);
+        response.addCookie(cookie);
+    }
+
+    @PostMapping("/registration")
+    public void registration(@RequestBody UserDTO userDTO, HttpServletResponse response) {
+        String jwt = authService.registration(userDTO);
         Cookie cookie = new Cookie("jwt", jwt);
         cookie.setMaxAge(3600);
         response.addCookie(cookie);

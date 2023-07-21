@@ -6,13 +6,12 @@ public class PasswordService {
 
     private final static int workload = 12;
 
-    public static String hashPassword(String password_plaintext) {
+    public static String hashPassword(String passwordPlaintext) {
         String salt = BCrypt.gensalt(workload);
-        String hashed_password = BCrypt.hashpw(password_plaintext, salt);
-        return hashed_password;
+        return BCrypt.hashpw(passwordPlaintext, salt);
     }
 
-    public static boolean checkPassword(String password_plaintext, String stored_hash) {
-        return BCrypt.checkpw(password_plaintext, stored_hash);
+    public static boolean checkPassword(String passwordPlaintext, String stored_hash) {
+        return BCrypt.checkpw(passwordPlaintext, stored_hash);
     }
 }
