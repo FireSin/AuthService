@@ -22,13 +22,13 @@ public class User {
     private Long id;
 
     @NotBlank(message = "Name is required")
-    @Column(name = "Name", nullable = false, unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @NotBlank(message = "Password is required")
-    @Column(name = "Password", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "Role")
+    @Column(name = "role")
     private String role;
 }

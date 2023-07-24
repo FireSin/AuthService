@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = new User();
         user.setName(userDTO.getName());
-        user.setPassword(userDTO.getPassword());
+        user.setPassword(PasswordService.hashPassword(userDTO.getPassword()));
         user.setRole(role);
         userRepository.save(user);
         return user;

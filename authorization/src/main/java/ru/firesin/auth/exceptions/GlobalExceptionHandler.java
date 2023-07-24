@@ -13,4 +13,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleException(AuthorizeException e) {
         return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).body(e.getMessage());
     }
+
+    @ExceptionHandler(UsernamePasswordException.class)
+    public ResponseEntity<String> handleException(UsernamePasswordException e) {
+        return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).body(e.getMessage());
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<String> handleException(UserNotFoundException e) {
+        return ResponseEntity.status(HttpServletResponse.SC_NOT_FOUND).body(e.getMessage());
+    }
 }
