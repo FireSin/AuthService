@@ -4,11 +4,10 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class PasswordService {
 
-    private final static int workload = 12;
+    private static final int workload = 12;
 
     public static String hashPassword(String passwordPlaintext) {
-        String salt = BCrypt.gensalt(workload);
-        return BCrypt.hashpw(passwordPlaintext, salt);
+        return BCrypt.hashpw(passwordPlaintext, BCrypt.gensalt(workload));
     }
 
     public static boolean checkPassword(String passwordPlaintext, String stored_hash) {

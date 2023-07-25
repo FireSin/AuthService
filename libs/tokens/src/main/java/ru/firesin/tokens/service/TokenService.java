@@ -7,28 +7,25 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import ru.firesin.tokens.dto.TokenUserDTO;
 
 @Service
 public class TokenService {
-    private final String masterKey;
+
     private final Algorithm algorithm;
 
     public TokenService(@Value("masterKey") String masterKey) {
-        this.masterKey = masterKey;
         algorithm = Algorithm.HMAC512(masterKey);
     }
 
-    public String generateToken(String role){
-        String token = JWT.create().withClaim("Role", role).sign(algorithm);
-        return token;
+    public String generateToken(TokenUserDTO tokenUserDTO) {
+        return JWT.create().withClaim("Role", tokenUserDTO.getRole()).sign(algorithm);
     }
 
-    public void checkToken(String token, String access) throws JWTVerificationException{
+    public TokenUserDTO deserializationToken(String token) throws JWTVerificationException{
         JWTVerifier verifier = JWT.require(algorithm).build();
         DecodedJWT decodedJWT = verifier.verify(token);
         var role = decodedJWT.getClaim("Role").asString();
-        if (!role.equals(access)) {
-            throw new JWTVerificationException("Access denied");
-        }
+        return new TokenUserDTO(role);
     }
 }

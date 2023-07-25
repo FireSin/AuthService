@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.firesin.auth.dto.request.UserDTO;
 import ru.firesin.auth.entity.User;
-import ru.firesin.auth.exceptions.UsernamePasswordException;
+import ru.firesin.auth.exceptions.AuthorizeException;
 import ru.firesin.auth.exceptions.UserNotFoundException;
 import ru.firesin.auth.repository.UserRepository;
 
@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public User findUserByName(UserDTO userDTO) {
+    public User findUser(UserDTO userDTO) {
         checkUserDTO(userDTO);
         User user = userRepository.findByName(userDTO.getName());
         if (user == null){
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     public User saveNewUser(UserDTO userDTO, String role) {
         checkUserDTO(userDTO);
         if (userRepository.findByName(userDTO.getName()) != null){
-            throw new UsernamePasswordException("User already exists");
+            throw new AuthorizeException("User already exists");
         }
         User user = new User();
         user.setName(userDTO.getName());
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     private void checkUserDTO(UserDTO userDTO){
         if (userDTO.getName() == null || userDTO.getName().isEmpty()
             || userDTO.getPassword() == null || userDTO.getPassword().isEmpty()){
-            throw new UsernamePasswordException("Wrong username or password");
+            throw new AuthorizeException("Username or password is empty");
         }
     }
 }

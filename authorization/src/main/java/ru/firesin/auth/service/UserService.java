@@ -4,7 +4,7 @@ import ru.firesin.auth.dto.request.UserDTO;
 import ru.firesin.auth.entity.User;
 
 public interface UserService {
-    User findUserByName(UserDTO userDTO);
+    User findUser(UserDTO userDTO);
     User saveNewUser(UserDTO user, String role);
     User saveNewUser(UserDTO user);
 
