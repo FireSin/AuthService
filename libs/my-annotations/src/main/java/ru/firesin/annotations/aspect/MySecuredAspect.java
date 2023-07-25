@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 @Component
 @AllArgsConstructor
-public class MySecuredAspect {
+public class MySecuredAspect { //TODO Не вижу обработчика твоих ошибок в этой либе, те мне придётся в каждом модуле свой писать постоянно?
 
     private final TokenService tokenService;
 
@@ -31,10 +31,10 @@ public class MySecuredAspect {
             Cookie cookie = WebUtils.getCookie(request, "jwt");
             tokenUserDTO = tokenService.deserializationToken(cookie.getValue());
         } catch (Exception e){
-            throw new JWTVerificationException("You have no path");
+            throw new JWTVerificationException("You have no path"); //TODO А че тут написано, что такое path?
         }
         if (!tokenUserDTO.getRole().equals(mySecured.value())){
-            throw new JWTVerificationException("You have no path");
+            throw new JWTVerificationException("You have no path"); //TODO А почему ошибка та же? В 1ом случае у тебя не прочитался JWT, а тут нет прав
         }
         return joinPoint.proceed();
     }

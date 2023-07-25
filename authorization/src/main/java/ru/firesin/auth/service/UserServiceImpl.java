@@ -29,9 +29,9 @@ public class UserServiceImpl implements UserService {
     public User saveNewUser(UserDTO userDTO, String role) {
         checkUserDTO(userDTO);
         if (userRepository.findByName(userDTO.getName()) != null){
-            throw new AuthorizeException("User already exists");
+            throw new AuthorizeException("User already exists"); //TODO почему Authorize при save?
         }
-        User user = new User();
+        User user = new User(); //TODO почему не маппер используешь?
         user.setName(userDTO.getName());
         user.setPassword(PasswordService.hashPassword(userDTO.getPassword()));
         user.setRole(role);

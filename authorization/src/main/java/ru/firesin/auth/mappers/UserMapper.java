@@ -8,7 +8,7 @@ import ru.firesin.tokens.dto.TokenUserDTO;
 @Mapper
 public interface UserMapper {
 
-    UserMapper INSTANSE = Mappers.getMapper(UserMapper.class);
+    UserMapper INSTANSE = Mappers.getMapper(UserMapper.class); //TODO Поищи как можно по другому
 
     TokenUserDTO toTokenUserDTO(User user);
 }

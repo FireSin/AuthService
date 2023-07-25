@@ -18,7 +18,7 @@ public class TokenService {
         algorithm = Algorithm.HMAC512(masterKey);
     }
 
-    public String generateToken(TokenUserDTO tokenUserDTO) {
+    public String generateToken(TokenUserDTO tokenUserDTO) { //TODO сделай рефлексию, сейчас изменяя поле ты должен будешь его добавить везде, хочу чтобы не было такого)
         return JWT.create().withClaim("Role", tokenUserDTO.getRole()).sign(algorithm);
     }
 

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import ru.firesin.tokens.service.TokenService;
 
 @Configuration
-@PropertySource("classpath:application.properties")
+@PropertySource("classpath:application.properties") //TODO Посмотри как еще можно делать
 public class TokenServiceConfig {
     @Value("${masterKey}")
     private String masterKey;

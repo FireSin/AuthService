@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface AuthController {
 
-    public void login(@RequestBody UserDTO userDTO, HttpServletResponse response);
+    public void login(@RequestBody UserDTO userDTO, HttpServletResponse response); //TODO Ну убери ты public
 
     public void registration(@RequestBody UserDTO userDTO, HttpServletResponse response);
 }
