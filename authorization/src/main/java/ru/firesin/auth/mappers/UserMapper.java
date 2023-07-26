@@ -1,14 +1,14 @@
 package ru.firesin.auth.mappers;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import ru.firesin.auth.dto.request.UserDTO;
 import ru.firesin.auth.entity.User;
-import ru.firesin.tokens.dto.TokenUserDTO;
+import ru.firesin.tokens.dto.TokenDTO;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    UserMapper INSTANSE = Mappers.getMapper(UserMapper.class); //TODO Поищи как можно по другому
+    TokenDTO toUserDTO(User user);
 
-    TokenUserDTO toTokenUserDTO(User user);
+    User toUser(UserDTO userDTO);
 }

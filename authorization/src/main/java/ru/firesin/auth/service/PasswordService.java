@@ -4,13 +4,13 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class PasswordService {
 
-    private static final int workload = 12; //TODO CAPSOM
+    private static final int WORKLOAD = 12;
 
     public static String hashPassword(String passwordPlaintext) {
-        return BCrypt.hashpw(passwordPlaintext, BCrypt.gensalt(workload));
+        return BCrypt.hashpw(passwordPlaintext, BCrypt.gensalt(WORKLOAD));
     }
 
-    public static boolean checkPassword(String passwordPlaintext, String stored_hash) { //TODO Название переменной
-        return BCrypt.checkpw(passwordPlaintext, stored_hash);
+    public static boolean checkPassword(String passwordPlaintext, String storedHash) {
+        return BCrypt.checkpw(passwordPlaintext, storedHash);
     }
 }

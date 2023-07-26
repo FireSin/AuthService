@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
@@ -21,11 +20,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Name is required") //TODO убрать
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @NotBlank(message = "Password is required")
     @Column(name = "password", nullable = false)
     private String password;
 

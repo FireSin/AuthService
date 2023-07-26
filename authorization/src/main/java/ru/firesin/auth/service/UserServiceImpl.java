@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.firesin.auth.dto.request.UserDTO;
 import ru.firesin.auth.entity.User;
-import ru.firesin.auth.exceptions.AuthorizeException;
-import ru.firesin.auth.exceptions.UserNotFoundException;
+import ru.firesin.auth.exceptions.UserServiceException;
 import ru.firesin.auth.repository.UserRepository;
 
 
@@ -20,7 +19,7 @@ public class UserServiceImpl implements UserService {
         checkUserDTO(userDTO);
         User user = userRepository.findByName(userDTO.getName());
         if (user == null){
-            throw new UserNotFoundException("User not found");
+            throw new UserServiceException("User not found");
         }
         return user;
     }
@@ -29,7 +28,7 @@ public class UserServiceImpl implements UserService {
     public User saveNewUser(UserDTO userDTO, String role) {
         checkUserDTO(userDTO);
         if (userRepository.findByName(userDTO.getName()) != null){
-            throw new AuthorizeException("User already exists"); //TODO почему Authorize при save?
+            throw new UserServiceException("User already exists");
         }
         User user = new User(); //TODO почему не маппер используешь?
         user.setName(userDTO.getName());
@@ -47,7 +46,7 @@ public class UserServiceImpl implements UserService {
     private void checkUserDTO(UserDTO userDTO){
         if (userDTO.getName() == null || userDTO.getName().isEmpty()
             || userDTO.getPassword() == null || userDTO.getPassword().isEmpty()){
-            throw new AuthorizeException("Username or password is empty");
+            throw new UserServiceException("Username or password is empty");
         }
     }
 }

@@ -14,17 +14,18 @@ public class AuthServiceImpl implements AuthService{
 
     private final UserService userService;
     private final TokenService tokenService;
+    private final UserMapper userMapper;
 
     public String login(UserDTO userDTO) throws AuthorizeException {
         User user = userService.findUser(userDTO);
         if (!PasswordService.checkPassword(userDTO.getPassword(), user.getPassword())) {
             throw new AuthorizeException("Wrong username or password");
         }
-        return tokenService.generateToken(UserMapper.INSTANSE.toTokenUserDTO(user));
+        return tokenService.generateToken(userMapper.toUserDTO(user));
     }
 
     public String registration(UserDTO userDTO) {
         User user = userService.saveNewUser(userDTO);
-        return tokenService.generateToken(UserMapper.INSTANSE.toTokenUserDTO(user));
+        return tokenService.generateToken(userMapper.toUserDTO(user));
     }
 }

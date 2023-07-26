@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class TokenUserDTO { //TODO Просто TokenDTO
+public class TokenDTO {
     private String role;
 }
