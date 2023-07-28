@@ -13,9 +13,9 @@
 	<name>authService</name>
 
 	<modules>
-		<module>entry</module>
-		<module>authorization</module>
+		<module>public-api</module>
 		<module>libs</module>
+		<module>feature</module>
 	</modules>
 
 	<parent>
@@ -32,6 +32,11 @@
 		<lombok.version>1.18.28</lombok.version>
 		<h2.version>2.2.220</h2.version>
 		<java-jwt.version>4.4.0</java-jwt.version>
+		<validation.api.version>2.0.1.Final</validation.api.version>
+		<jbcrypt.version>0.4</jbcrypt.version>
+		<mapstruct.version>1.5.3.Final</mapstruct.version>
+		<mapstruct.processor.version>1.5.5.Final</mapstruct.processor.version>
+		<lombok.mapstruct.version>0.2.0</lombok.mapstruct.version>
 	</properties>
 
 	<dependencies>

@@ -7,6 +7,7 @@ import ru.firesin.tokens.service.TokenService;
 
 @Configuration
 public class TokenServiceConfig {
+
     @Value("${token.masterKey}")
     private String masterKey;
 
