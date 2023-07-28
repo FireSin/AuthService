@@ -1,10 +1,12 @@
 package ru.firesin.feature.password.impl;
 
+import lombok.NoArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import ru.firesin.feature.password.api.PasswordService;
 
 @Service
+@NoArgsConstructor
 public class PasswordServiceImpl implements PasswordService {
 
     private static final int WORKLOAD = 12;

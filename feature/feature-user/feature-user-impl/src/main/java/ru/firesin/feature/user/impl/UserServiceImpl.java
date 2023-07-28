@@ -6,6 +6,7 @@ import ru.firesin.feature.password.api.PasswordService;
 import ru.firesin.feature.user.app.UserService;
 import ru.firesin.feature.user.app.dtoUser.request.UserDTO;
 import ru.firesin.feature.user.app.entity.User;
+import ru.firesin.feature.user.app.mappers.UserMapper;
 import ru.firesin.feature.user.app.repository.UserRepository;
 import ru.firesin.feature.user.impl.exceptions.UserServiceException;
 
@@ -16,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordService passwordService;
+    private final UserMapper userMapper;
 
     @Override
     public User findUser(UserDTO userDTO) {
@@ -33,8 +35,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByName(userDTO.getName()) != null){
             throw new UserServiceException("User already exists");
         }
-        User user = new User(); //TODO почему не маппер используешь?
-        user.setName(userDTO.getName());
+        User user = userMapper.toUser(userDTO);
         user.setPassword(passwordService.hashPassword(userDTO.getPassword()));
         user.setRole(role);
         userRepository.save(user);

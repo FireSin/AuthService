@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.firesin.tokens.dto.TokenDTO;
 
-@Service
 public class TokenService {
 
     private final Algorithm algorithm;

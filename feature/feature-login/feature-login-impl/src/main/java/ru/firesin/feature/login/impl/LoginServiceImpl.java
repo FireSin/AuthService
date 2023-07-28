@@ -18,11 +18,11 @@ public class LoginServiceImpl implements LoginService {
     private final UserService userService;
     private final TokenService tokenService;
     private final UserMapper userMapper;
-    private final PasswordService passwordSevice;
+    private final PasswordService passwordService;
 
     public String login(UserDTO userDTO) {
         User user = userService.findUser(userDTO);
-        if (!passwordSevice.checkPassword(userDTO.getPassword(), user.getPassword())) {
+        if (!passwordService.checkPassword(userDTO.getPassword(), user.getPassword())) {
             throw new LoginException("Wrong username or password");
         }
         return tokenService.generateToken(userMapper.toUserDTO(user));

@@ -14,4 +14,12 @@
     <artifactId>feature-login-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>ru.firesin</groupId>
+            <artifactId>feature-user-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>

@@ -21,19 +21,4 @@
         <module>feature-login-impl</module>
     </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>ru.firesin</groupId>
-            <artifactId>feature-user-impl</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>ru.firesin</groupId>
-            <artifactId>feature-password-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
-
 </project>
