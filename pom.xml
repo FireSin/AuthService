@@ -13,9 +13,9 @@
 	<name>authService</name>
 
 	<modules>
-		<module>public-api</module>
 		<module>libs</module>
 		<module>feature</module>
+		<module>public-api</module>
 	</modules>
 
 	<parent>

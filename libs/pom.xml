@@ -5,15 +5,13 @@
 
     <description>Библиотеки</description>
 
-    <groupId>ru.firesin</groupId>
     <artifactId>libs</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <packaging>pom</packaging>
 
-    <name>libs</name>
-
     <modules>
-        <module>tokens</module>
+        <module>token-service</module>
         <module>my-annotations</module>
     </modules>
 
