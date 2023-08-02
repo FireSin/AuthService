@@ -13,6 +13,7 @@ import ru.firesin.annotations.secured.MySecured;
 import ru.firesin.tokens.dto.TokenDTO;
 import ru.firesin.tokens.service.TokenService;
 
+import java.lang.reflect.Field;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,8 +34,18 @@ public class MySecuredAspect {
         } catch (Exception e){
             throw new JWTVerificationException("Incorrect token");
         }
-        if (!tokenDTO.getRole().equals(mySecured.value())){
+
+        Field[] fields = tokenDTO.getClass().getDeclaredFields();
+        if (mySecured.value().length != fields.length){
             throw new JWTVerificationException("You don't have access rights");
+        }
+        for (int i = 0; i < fields.length; i++) {
+            fields[i].setAccessible(true);
+            if (!fields[i].get(tokenDTO).toString().equals(mySecured.value()[i])){
+                fields[i].setAccessible(false);
+                throw new JWTVerificationException("You don't have access rights");
+            }
+            fields[i].setAccessible(false);
         }
         return joinPoint.proceed();
     }

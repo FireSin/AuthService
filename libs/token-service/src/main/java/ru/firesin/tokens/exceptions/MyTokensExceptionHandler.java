@@ -1,4 +1,4 @@
-package ru.firesin.annotations.exceptions;
+package ru.firesin.tokens.exceptions;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import lombok.NoArgsConstructor;
@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @ControllerAdvice
 @NoArgsConstructor
-public class MyAnnotationsExceptionHandler {
+public class MyTokensExceptionHandler {
 
-    @ExceptionHandler({JWTVerificationException.class, NoSuchFieldException.class})
+    @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<String> handleException(Exception e) {
         return ResponseEntity.status(HttpServletResponse.SC_FORBIDDEN).body(e.getMessage());
     }
